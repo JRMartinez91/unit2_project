@@ -31,3 +31,5 @@ router.get('/:id',(req,res)=>{
 //Delete
 
 //Create
+
+module.exports = router;

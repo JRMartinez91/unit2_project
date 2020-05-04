@@ -2,7 +2,7 @@
 const express = require('express');
 const app = express();
 const port = 3000;
-const Product = require('./models/products.js');
+const Track = require('./models/tracks.js');
 const mongoose = require('mongoose')
 const methodOverride = require('method-override')
 
@@ -23,7 +23,7 @@ mongoose.connection.once('open',()=>{
     console.log("connected to mongo");
 })
 
-const tracksController = require('./controllers/fruits.js');
+const tracksController = require('./controllers/tracks.js');
 app.use('/tracklist',tracksController);
 
 //listen
