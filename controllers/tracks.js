@@ -15,6 +15,11 @@ router.get('/',(req,res)=>{
     })
 })
 
+//Querytest
+router.get('/querytest',(req,res)=>{
+    res.send(req.query.foo)
+})
+
 //New
 router.get('/newtrack',(req,res)=>{
     //obtain a brute force list of all preexisting genres
