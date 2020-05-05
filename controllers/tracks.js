@@ -8,16 +8,38 @@ const Track = require('../models/tracks.js');
 router.get('/',(req,res)=>{
     //get all tracks
     Track.find({},(error,allTracks)=>{
+        //create an object where each key is a genre and each value is an array of the songs in that genre
+
+        //construct the array of genre titles
+        let genreList = []
+        allTracks.map((doc,index)=>{
+            if(!genreList.includes(doc.genre)){
+                genreList.push(doc.genre);
+            }
+        })
+
+        //alphabetize the array
+        genreList.sort();
+
+        //use the array to organize an array-of-arrays
+        let jukebox = [];
+        for(genre of genreList){
+            //create an empty array for each genre
+            jukebox.push([])
+        }
+
+        //loop through each track in the list and add it to the right array
+        for(track of allTracks){
+            //check the track's genre, get its index in the genre list,
+            //and push it to the corresponding index in the jukebox
+            jukebox[genreList.indexOf(track.genre)].push(track);
+        }
+
         //send to Index.jsx
         res.render('Index',{
-            tracks:allTracks
+            jukebox: jukebox
         })
     })
-})
-
-//Querytest
-router.get('/querytest',(req,res)=>{
-    res.send(req.query.foo)
 })
 
 //New
