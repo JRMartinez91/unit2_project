@@ -54,6 +54,18 @@ router.get('/track/:id',(req,res)=>{
 })
 
 //Update
+router.put('/track/:id',(req,res)=>{
+        if(req.body.addingNewGenre==="on"){
+            req.body.genre = req.body.newGenre;
+        } else {
+            req.body.genre = req.body.oldGenre;
+        }
+        
+        //update track document
+        Track.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err,updatedTrack)=>{
+            res.redirect(`/tracklist/track/${req.params.id}`)
+        })
+})
 
 //Delete
 router.delete('/:id',(req,res)=>{
