@@ -30,7 +30,7 @@ class New extends React.Component {
                         {/* Create a list of genre names by mapping over the array created above */}
                         { genreList.map((name,index)=>{
                             return(
-                                <option value={name.toLowerCase()}>{name}</option>
+                                <option value={name}>{name}</option>
                             )
                         })}
                     </select>
