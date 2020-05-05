@@ -6,6 +6,8 @@ class New extends React.Component {
         //  go through every track one by one and compile a list of genre names encountered
         //  then save these to an array, which will then be used to create the dropdown menu below
         //  Ideally we'd have a preexisitng masterlist of genres saved elsewhere...
+        //  Then again this will automatically track when all songs in a genre have been deleted and remove
+        //  the genre from any list. Hrm.
         const {genres} = this.props;
         //construct the array
         let genreList = []

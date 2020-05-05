@@ -43,6 +43,12 @@ router.get('/track/:id',(req,res)=>{
 //Update
 
 //Delete
+router.delete('/:id',(req,res)=>{
+    //delete document from collection
+    Track.findByIdAndRemove(req.params.id,(err,track)=>{
+        res.redirect('/tracklist');
+    })
+})
 
 //Create
 //THIS MUST INCLUDE A SYSTEM THAT FORBIDS DUPLICATE LINKS OR TITLES
