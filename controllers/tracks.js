@@ -17,14 +17,20 @@ router.get('/',(req,res)=>{
 
 //New
 router.get('/newtrack',(req,res)=>{
-    //render New.jsx
-    res.send("Add a New Track")
+    //obtain a brute force list of all preexisting genres
+    Track.find({}, 'genre', (err,docs)=>{
+        //render New.jsx
+        res.render('New',{
+            genres: docs
+        })
+    })
+   
 })
 
 //Edit
 
 //Show
-router.get('/:id',(req,res)=>{
+router.get('/track/:id',(req,res)=>{
     //find the specific document by id
     Track.findById(req.params.id,(error,foundTrack)=>{
         //send to Show.jsx
@@ -41,30 +47,54 @@ router.get('/:id',(req,res)=>{
 //Create
 //THIS MUST INCLUDE A SYSTEM THAT FORBIDS DUPLICATE LINKS OR TITLES
 //if a duplicate is found, redirect to New.jsx with a message that duplicates are not allowed
+router.post('/',(req,res)=>{
+    if(req.body.addingNewGenre==="on"){
+        req.body.genre = req.body.newGenre;
+    } else {
+        req.body.genre = req.body.oldGenre;
+    }
+    //"genre" is a recognized attribute of the Track model,
+    //but oldGenre and newGenre are not, so they wil be ignored
+    Track.create(req.body,(error,createdTrack)=>{
+        res.send(createdTrack)
+    })
+})
+
+//Raw Index
+// rend raw JSON data to browser, for debugging purposes
+router.get('/rawdata',(req,res)=>{
+    Track.find({},(error,data)=>{
+        res.send(data);
+    })
+})
 
 //Seed
-//use only once!!!
+// use only once!!!
 // router.get('/seedtracks',async (req,res)=>{
 
 // const newTracks = [
 // {
-//     title: "One Winged Angel",
-//     url:"https://www.youtube.com/watch?v=t7wJ8pE2qKU",
-//     genre:"Boss Battle",
-//     source:"Final Fantasy VII",
-//     artist:"Nobuo Oematsu"
+//     title: "King Nothing",
+//     url:"https://www.youtube.com/watch?v=8PW7JeFKA-A",
+//     genre:"Heavy Metal",
+//     artist:"Metallica"
 // },
 // {
-//     title: "Mad Moxxi's Underdome Riot: Boss Wave",
-//     url: "https://www.youtube.com/watch?v=1WC-MOIwBTw",
-//     genre: "Boss Battle",
-//     source: "Borderlands",
+//     title: "Il Vento d'Oro",
+//     url: "https://www.youtube.com/watch?v=U0TXIXTzJEY",
+//     genre: "Anime",
+//     artist: "Yugo Kanno",
+//     source: "Jojo's Bizarre Adventure",
+//     stand: "Gold Experience"
 // },
 // {
-//     title: "Ode to Greed",
-//     url: "https://www.youtube.com/watch?v=Ul0YbD1AIeE",
-//     genre: "Boss Battle",
-//     source: "Payday 2",
+//     title: "Yellowline",
+//     url: "https://www.youtube.com/watch?v=DAK24FQ7DrA",
+//     genre: "Anime",
+//     source: "Redline",
+//     artist: "James Shimoji",
+//     racer: "Sweet JP",
+//     director: "Takeski Koike"
 // }]
 
 // try {

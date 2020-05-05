@@ -11,7 +11,7 @@ class Index extends React.Component{
                         tracks.map((track,index)=>{
                             return(
                                 <li>
-                                    <h3><a href={`/tracklist/${track.id}`}>{track.title}</a></h3>
+                                    <h3><a href={`/tracklist/track/${track.id}`}>{track.title}</a></h3>
                                     <p>{track.url}</p>
                                     <p>{track.genre}</p>
                                 </li>
