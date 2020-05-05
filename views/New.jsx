@@ -8,10 +8,10 @@ class New extends React.Component {
         //  Ideally we'd have a preexisitng masterlist of genres saved elsewhere...
         //  Then again this will automatically track when all songs in a genre have been deleted and remove
         //  the genre from any list. Hrm.
-        const {genres} = this.props;
+        const {list} = this.props;
         //construct the array
         let genreList = []
-        genres.map((doc,index)=>{
+        list.map((doc,index)=>{
             if(!genreList.includes(doc.genre)){
                 genreList.push(doc.genre);
             }

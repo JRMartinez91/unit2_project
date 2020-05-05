@@ -21,13 +21,26 @@ router.get('/newtrack',(req,res)=>{
     Track.find({}, 'genre', (err,docs)=>{
         //render New.jsx
         res.render('New',{
-            genres: docs
+            list: docs
         })
     })
    
 })
 
 //Edit
+router.get('/track/:id/edit',(req,res)=>{
+    //find the track in question by id
+    Track.findById(req.params.id,(err,foundTrack)=>{
+        //get genrelist
+        Track.find({},'genre',(err,genres)=>{
+            //render Edit.jsx'
+            res.render('Edit',{
+                track: foundTrack, list: genres
+            })
+        })
+    })
+})
+
 
 //Show
 router.get('/track/:id',(req,res)=>{

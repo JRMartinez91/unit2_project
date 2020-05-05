@@ -17,6 +17,7 @@ class Index extends React.Component{
                                     <form action={`/tracklist/${track._id}?_method=DELETE`} method="POST">
                                         <input type="submit" value="delete"/>
                                     </form>
+                                    <p><a href={`/tracklist/track/${track._id}/edit`}>Edit Track</a></p>
                                 </li>
                             )
                         })
