@@ -1,6 +1,7 @@
 //dependencies
 const express = require('express');
 const app = express();
+//heroku requires process.env.port, change this
 const port = 3000;
 const mongoose = require('mongoose')
 const methodOverride = require('method-override')
@@ -16,6 +17,8 @@ app.use(express.static('public')); //not used in this particular exercise,but al
 app.use(methodOverride('_method'));
 
 
+//Refactor this to be more like heroku project????
+//remember to set node.js engine version in package.json
 //mongoose Connection
 mongoose.connect('mongodb://localhost:27017/basiccrud',{useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.connection.once('open',()=>{

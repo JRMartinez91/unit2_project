@@ -14,11 +14,11 @@ class Show extends React.Component{
         let artist_label = ""
         let source_label = ""
 
-        if(artist!==undefined){
+        if(artist!=="No Artist"){
             artist_label = (<p>Artist: {artist}</p>)
         }
 
-        if(source!==undefined){
+        if(source!=="No Source"){
             source_label = (<p>Source: {source}</p>)
         } 
 
