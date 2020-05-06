@@ -2,22 +2,28 @@ const React = require('react');
 
 class Index extends React.Component{
     render(){
-        const {jukebox} = this.props;
+        const {jukebox, searchParameter} = this.props;
         return(
             <>
                 <h1>Annasthesia's Marvelous Musical Automat</h1>
+                <nav>
+                    <a href="/tracklist/newtrack">Add New Track</a>
+                    <a href="/tracklist?search=genre">Sort by Genre</a>
+                    <a href="/tracklist?search=artist">Sort by Artist</a>
+                    <a href="/tracklist?search=source">Sort by Source</a>
+                </nav>
                 <div>
                     {
-                        //jukebox is an array-of-arrays that contains each genre category as an element
-                        jukebox.map((genre,index)=>{
+                        //jukebox is an array-of-arrays that contains each group category as an element
+                        jukebox.map((group,index)=>{
                             return(
                                 <div>
-                                    {/* we can asssume the first song in the category has the correct genre name on hand. */}
-                                    <h2>{genre[0].genre}</h2>
+                                    {/* we can asssume the first song in the category has the correct group name on hand. */}
+                                    <h2>{group[0][searchParameter]}</h2>
                                     <div>
                                     {
                                         // each genre category is an array of tracks
-                                        genre.map((track,index)=>{
+                                        group.map((track,index)=>{
                                         return(
                                             <div>
                                                 <h3><a href={`/tracklist/track/${track.id}`}>{track.title}</a></h3>
@@ -34,7 +40,7 @@ class Index extends React.Component{
                                     </div>
                                 </div>
                             ) 
-                        }) //end mapping over genres 
+                        }) //end mapping over groups
                     }
                 </div> {/* end list of all tracks div */}
             </>

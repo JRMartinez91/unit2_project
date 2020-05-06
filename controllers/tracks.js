@@ -8,36 +8,58 @@ const Track = require('../models/tracks.js');
 router.get('/',(req,res)=>{
     //get all tracks
     Track.find({},(error,allTracks)=>{
-        //create an object where each key is a genre and each value is an array of the songs in that genre
 
-        //construct the array of genre titles
-        let genreList = []
+        //based on info from the url query, determine whether to group by Genre, Artist, or Source
+        let searchParameter
+        const validParameters = ['genre','artist','source']
+
+        //if the search parameter is EMPTY or INVALID....
+        if(!req.query.search || !validParameters.includes(req.query.search)){
+            //.... then it defaults to Genre
+            searchParameter = "genre";
+        } else {
+            searchParameter = req.query.search;
+        }
+
+        //construct the array of genre/artist/source names
+        let groupList = []
         allTracks.map((doc,index)=>{
-            if(!genreList.includes(doc.genre)){
-                genreList.push(doc.genre);
+            if(!groupList.includes(doc[searchParameter])){
+                groupList.push(doc[searchParameter]);
             }
         })
 
         //alphabetize the array
-        genreList.sort();
+        groupList.sort();
 
-        //use the array to organize an array-of-arrays
+        //if searching by source or artist, make sure the uncategorized ones appear LAST
+        if(searchParameter==="artist"){
+            groupList.splice(groupList.indexOf("No Artist"),1);
+            groupList.push("No Artist")
+
+        } else if(searchParameter==="source"){
+            groupList.splice(groupList.indexOf("No Source"),1);
+            groupList.push("No Source")
+        }
+
+        //use the groupList to organize an array-of-arrays
         let jukebox = [];
-        for(genre of genreList){
-            //create an empty array for each genre
+        for(group of groupList){
+            //create an empty array for each group
             jukebox.push([])
         }
 
         //loop through each track in the list and add it to the right array
         for(track of allTracks){
-            //check the track's genre, get its index in the genre list,
+            //check the track's group, get its index in the group list,
             //and push it to the corresponding index in the jukebox
-            jukebox[genreList.indexOf(track.genre)].push(track);
+            jukebox[groupList.indexOf(track[searchParameter])].push(track);
         }
 
         //send to Index.jsx
         res.render('Index',{
-            jukebox: jukebox
+            jukebox: jukebox,
+            searchParameter: searchParameter
         })
     })
 })
