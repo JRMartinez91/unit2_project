@@ -1,4 +1,5 @@
 const React = require('react');
+const Header = require('./Header')
 
 class New extends React.Component {
     render(){
@@ -25,6 +26,7 @@ class New extends React.Component {
                 <link href="/style.css" rel="stylesheet"></link>
             </head>
             <body>
+            <Header/>
             <div className="form-box-wrapper">
             <div className="form-box">
                 <h1>New Track</h1>

@@ -1,12 +1,11 @@
 const React = require('react')
+const Header = require('./Header')
 
 class Edit extends React.Component{
     render(){
         //get track variables
         const {_id,title,genre,artist,source,tags} = this.props.track;
         let {url} = this.props.track
-        //formal URL for embedding
-        url = url.replace("watch?v=","embed/")
         //get brute force genre list
         const {list} = this.props;
         //construct the array
@@ -33,6 +32,7 @@ class Edit extends React.Component{
                 <link href="/style.css" rel="stylesheet"></link>
             </head>
             <body>
+                <Header/>
             <div className="form-box-wrapper">
                 <div className="video-wrapper">
                     <iframe src={url} width="560" height="315" frameBorder="0" allowFullScreen></iframe>
@@ -45,6 +45,7 @@ class Edit extends React.Component{
                     {/* Find a way to make it so either:
                     the "enter a name for the genre box only appears when "new genre" is selected from the dropdown
                     OR the dropdown menu only appears when the 'use preexisting genre' checkbox is checked */}
+                    <p>Genre:
                     <select name="oldGenre" form="updateTrack">
                         {/* Create a list of genre names by mapping over the array created above */}
                         { genreList.map((name,index)=>{
@@ -56,9 +57,9 @@ class Edit extends React.Component{
                                 return(<option value={name}>{name}</option>)
                             }
                         })}
-                    </select>
-                    <p>Add New Genre:<input type="checkbox" name="addingNewGenre"/></p>
-                    <input type="text" name="newGenre"/>
+                    </select></p>
+                    <p>Add New Genre?:<input type="checkbox" name="addingNewGenre"/></p>
+                    <p>New Genre:<input type="text" name="newGenre"/>(optional)</p>
                     <p>Optional Information</p>
                     <p>Artist:<input type="text" name="artist" defaultValue={artist}/></p>
                     <p>Source:<input type="text" name="source" defaultValue={source}/></p>

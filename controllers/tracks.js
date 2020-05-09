@@ -218,7 +218,8 @@ router.get('/tagsearch',(req,res)=>{
         Track.find({tags: searchParameter},(error,foundTracks)=>{
             res.render('TagSearch',{
                 tracks: foundTracks,
-                tagList: tagList
+                tagList: tagList,
+                activeTag: searchParameter
             })
         })
 

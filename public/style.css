@@ -1,7 +1,12 @@
 *{
-    border: 1px solid hotpink;
+    border: 1px solid lightblue;
     padding: 10px;
     box-sizing: border-box;
+}
+/* Universal */
+
+input{
+    border: 1px solid black;
 }
 /* Index Page */
 .title-card{
@@ -14,8 +19,9 @@
 }
 
 .title-card h3{
-    margin: 0;
+    margin: 2px 0;
     padding: 2px 10px;
+    border-bottom: 2px solid rgb(78, 66, 43);
 }
 
 .title-card a{
@@ -91,6 +97,14 @@
     padding: 10px;
 }
 
+.url-display{
+    width: 350px;
+    height: 25px;
+    resize: none;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
 nav{
     display:flex;
     justify-content: space-evenly;
@@ -109,8 +123,13 @@ nav{
     width: 200px;
     text-align:center;
     font-size: 20px;
-    line-height: 2em;
-    padding: 0;
+    /* line-height: 2em; */
+    
+}
+
+.mini-nav{
+    display:flex;
+    justify-content: space-evenly;
 }
 
 /* Edit and New Pages  */
@@ -122,10 +141,15 @@ nav{
 
 .video-wrapper{
     margin-right: 10px;
+    border: 5px solid gray;
+    border-radius: 20px;
+    height: 350px;
 }
 
 .form-box{
     width: 500px;
+    border: 5px solid gray;
+    border-radius: 20px;
 }
 
 .form-box h1{
@@ -141,5 +165,32 @@ nav{
 .button-wrapper{
     text-align: center;
 }
+
+/* Tag Search */
+
+.tag-box{
+    background-color: lightseagreen;
+    color:white;
+}
+
+.tag-selected, .tag-box:focus {
+    background-color: red;
+}
+
+/* Show Page */
+
+.show-box{
+    border: 5px solid gray;
+    border-radius: 20px;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.show-box h1{
+    text-align:center;
+    border-bottom: 3px solid black;
+}
+
+
 
 

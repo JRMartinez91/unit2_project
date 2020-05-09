@@ -4,7 +4,7 @@ const Header = require('./Header')
 class Show extends React.Component{
     render(){
         //get variables
-        const {title, genre, artist, source, tags}=this.props.track;
+        const {title, genre, artist, source, tags, _id}=this.props.track;
         let {url} = this.props.track;
 
         //convert youtube url for use in iframe
@@ -26,29 +26,54 @@ class Show extends React.Component{
         //print either the list of tags, or "No Tags"
 
         let tag_label = "Tags: ";
+        let tag_array = [];
 
-        console.log(tags)
+        
         if(tags.length<1){
             tag_label = "No Tags";
         }else{
-            tag_label += tags.reduce((acc,curr)=>{
-                return acc + ", " + curr
-            })
+            for(let i = 0; i < tags.length; i++){
+                //take every tag in the list and convert it into a link
+                //that goes to the tag search page, for that tag
+                let tagLink = `/tracklist/tagsearch?search=${tags[i]}`;
+                tag_array.push(<a href={tagLink}>{tags[i]}</a>);
+            }
+        }
+
+        //determine whether to display "No Tags" or "Tags" + List of Tags
+        const tagHandler = () =>{
+            if(tags.length<1){
+                return ""
+            }else{
+                return(
+                    tag_array.map((tag,index)=>{
+                        return(tag)
+                    })
+                )
+            }
         }
 
         return(
-            <div>
+            <>
+            <head>
+                <link href="/style.css" rel="stylesheet"></link>
+            </head>
+            <body>
                 <Header/>
+            <div className="show-box">
                 <h1>{title}</h1>
                 {/* youtube video */}
                 <iframe src={url} width="560" height="315" frameBorder="0" allowFullScreen></iframe>
                 {/* artist_label and source_label will either be <p> elements or empty strings */}
+                <p><textarea className="url-display">{"!play "+track.url}</textarea></p>
                 <div>
                 {artist_label} {source_label}
+                <p>{tag_label}{tagHandler()}</p>
                 </div>
-                <p>{tag_label}</p>
-                <p><a href="/tracklist">Back to Index</a></p>
+                <p className="mini-nav"><a className="big-button" href={`/tracklist/track/${track._id}/edit`}>Edit</a></p>
             </div>
+            </body>
+            </>
         )
     }
 }

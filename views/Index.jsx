@@ -1,4 +1,6 @@
 const React = require('react');
+const ReactDOM = require('react-dom')
+const test = require('../scratchpad/test')
 // const GetButton = require('./GetButton')
 
 const handleClick=(e)=> {
@@ -55,7 +57,6 @@ class Index extends React.Component{
             </head>
             <body>
                 <h1>Annasthesia's Marvelous Musical Automat</h1>
-                <a type="button" href="#" onClick={this.sayHello}>Click me</a>
                 <nav>
                     <a className="big-button" href="/tracklist/newtrack">Add New Track</a>
                     <a className="big-button" href="/tracklist?search=genre">Sort by Genre</a>
@@ -79,6 +80,7 @@ class Index extends React.Component{
                                             <>
                                             <div className="title-card">
                                                 <h3>{track.title}</h3>
+                                                <textarea className="url-display">{"!play "+track.url}</textarea>
                                                 {/* <a href="#" class="copy-button" onClick={()=>{alert("this is a test!")}}>It's a button!</button> */}
                                                 {/* <p>{track.url}</p> */}
                                                 {/* <p>{track.genre}</p> */}

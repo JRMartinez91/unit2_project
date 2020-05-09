@@ -46,3 +46,7 @@ The next step is about organizing tracks -- being able to sort them on the index
     - wrestling with the diferences between react and express-react
 
 - the backstory of the site-- origin of Annasthesia Mascot? :P
+
+- quirk of the tag search. when no tags are selected, songs with no tags are displayed, as if "no tags" WAS a tag
+
+- incident with spaces-after-tags

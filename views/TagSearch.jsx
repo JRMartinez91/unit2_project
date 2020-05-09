@@ -5,7 +5,7 @@ class TagSearch extends React.Component{
     // based on a specific ta
     render(){
 
-        const {tagList,tracks} = this.props;
+        const {tagList,tracks,activeTag} = this.props;
 
         return(
             <>
@@ -14,12 +14,22 @@ class TagSearch extends React.Component{
             </head>
             <body>
                 {/* list of all tags */}
+                <Header/>
                 <h2>Tags:</h2>
                 <div>
                     {tagList.map((tag,index)=>{
+                        //make sure currently active tag is highlighted
+                        console.log(tag,activeTag)
+                        if(tag==activeTag){
+                            return(
+                                <a className="tag-box tag-selected" href={`tagsearch?search=${tag}`}>{tag}</a>
+                            )
+                        }else{
+                        //render the rest as normal
                         return(
-                            <a href={`tagsearch?search=${tag}`}>{tag}</a>
+                            <a className="tag-box" href={`tagsearch?search=${tag}`}>{tag}</a>
                         )
+                    }
                     })}
                 </div>
                 <h2>Tracks:</h2>
@@ -29,6 +39,7 @@ class TagSearch extends React.Component{
                             <>
                             <div className="title-card">
                                 <h3>{track.title}</h3>
+                                <textarea className="url-display">{"!play "+track.url}</textarea>
                                 {/* <button class="copy-button" onClick={this.testFunc}>It's a button!</button> */}
                                 {/* <p>{track.url}</p> */}
                                 {/* <p>{track.genre}</p> */}
