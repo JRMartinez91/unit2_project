@@ -2,7 +2,7 @@
 const express = require('express');
 const app = express();
 //heroku requires process.env.port, change this
-const port = 3000;
+const PORT = process.env.PORT || 3000;
 const mongoose = require('mongoose')
 const methodOverride = require('method-override')
 
@@ -34,6 +34,6 @@ const tracksController = require('./controllers/tracks.js');
 app.use('/tracklist',tracksController);
 
 //listen
-app.listen(port,()=>{
+app.listen(PORT,()=>{
     console.log('The Marvelous Muscial Automat is listening on Port',port);
 })
