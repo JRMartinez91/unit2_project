@@ -53,8 +53,3 @@ Also, as a much smaller thing, I’d like to polish the New/Edit pages, so that 
 ## Who the Heck is Annasthesia?
 
 She’s the character I was playing during the D&D campaign where I initially came up with the idea for the site. Attributing it to her rather than me was an in-joke among me and the other players. :)
-
-
-
-
-

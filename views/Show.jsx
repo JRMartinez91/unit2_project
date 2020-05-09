@@ -68,7 +68,7 @@ class Show extends React.Component{
                 {/* youtube video */}
                 <iframe src={embedURL} width="560" height="315" frameBorder="0" allowFullScreen></iframe>
                 {/* artist_label and source_label will either be <p> elements or empty strings */}
-                <p><textarea className="url-display">{"!play "+url}</textarea></p>
+                <p><textarea className="url-display" value={"!play "+url}></textarea></p>
                 <div>
                 {artist_label} {source_label}
                 <p>{tag_label}{tagHandler()}</p>

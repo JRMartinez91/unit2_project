@@ -127,11 +127,9 @@ router.put('/track/:id',(req,res)=>{
 
     req.body.tags = arrayCapCase(req.body.tags);
     
-    //loop through tags
-   
-
-    console.log(req.body.tags)
-    console.log(req.body.genre)
+    //manually set default values for a blank artist/source field
+    if(req.body.artist.length<1){req.body.artist="No Artist"}
+    if(req.body.source.length<1){req.body.source="No Source"}
         
     //update track document
     Track.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err,updatedTrack)=>{
@@ -167,6 +165,11 @@ router.post('/',(req,res)=>{
     //are not duplicated, they will all be displayed
     //With The First Letter Of Each Word Capitalized
     req.body.tags = req.body.tags.split(", ")
+    req.body.tags = arrayCapCase(req.body.tags);
+
+    //fill in default values for Artist and Source
+    if(req.body.artist.length<1){req.body.artist="No Artist"}
+    if(req.body.source.length<1){req.body.source="No Source"}
 
     for(word of req.body.tags){
         word[0] = word[0].toUpperCase();
@@ -176,6 +179,8 @@ router.post('/',(req,res)=>{
             }
         }
     }
+
+
 
     //prevent dupiclate titles or URLs
     let dupeTitle = false;

@@ -86,7 +86,7 @@ class Index extends React.Component{
                                             <>
                                             <div className="title-card">
                                                 <h3>{track.title}</h3>
-                                                <textarea className="url-display">{"!play "+track.url}</textarea>
+                                                <textarea className="url-display" value={"!play "+track.url}></textarea>
                                                 {/* <a href="#" class="copy-button" onClick={()=>{alert("this is a test!")}}>It's a button!</button> */}
                                                 {/* <p>{track.url}</p> */}
                                                 {/* <p>{track.genre}</p> */}
