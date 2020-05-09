@@ -4,7 +4,9 @@ const Track = require('../models/tracks.js');
 
 //routes
 
+////////////////////
 //Index
+////////////////////
 router.get('/',(req,res)=>{
     //get all tracks
     Track.find({},(error,allTracks)=>{
@@ -64,7 +66,9 @@ router.get('/',(req,res)=>{
     })
 })
 
+////////////////////
 //New
+////////////////////
 router.get('/newtrack',(req,res)=>{
     //obtain a brute force list of all preexisting genres
     Track.find({}, 'genre', (err,docs)=>{
@@ -76,7 +80,9 @@ router.get('/newtrack',(req,res)=>{
    
 })
 
+////////////////////
 //Edit
+////////////////////
 router.get('/track/:id/edit',(req,res)=>{
     //find the track in question by id
     Track.findById(req.params.id,(err,foundTrack)=>{
@@ -90,8 +96,9 @@ router.get('/track/:id/edit',(req,res)=>{
     })
 })
 
-
+////////////////////
 //Show
+////////////////////
 router.get('/track/:id',(req,res)=>{
     //find the specific document by id
     Track.findById(req.params.id,(error,foundTrack)=>{
@@ -102,7 +109,9 @@ router.get('/track/:id',(req,res)=>{
     })
 })
 
+////////////////////
 //Update
+////////////////////
 router.put('/track/:id',(req,res)=>{
     if(req.body.addingNewGenre==="on"){
         req.body.genre = req.body.newGenre;
@@ -130,7 +139,9 @@ router.put('/track/:id',(req,res)=>{
     })
 })
 
+////////////////////
 //Delete
+////////////////////
 router.delete('/:id',(req,res)=>{
     //delete document from collection
     Track.findByIdAndRemove(req.params.id,(err,track)=>{
@@ -138,7 +149,9 @@ router.delete('/:id',(req,res)=>{
     })
 })
 
+////////////////////
 //Create
+////////////////////
 //THIS MUST INCLUDE A SYSTEM THAT FORBIDS DUPLICATE LINKS OR TITLES
 //if a duplicate is found, redirect to New.jsx with a message that duplicates are not allowed
 router.post('/',(req,res)=>{
@@ -192,7 +205,9 @@ router.post('/',(req,res)=>{
     })
 })
 
+////////////////////
 //Tag Search
+////////////////////
 router.get('/tagsearch',(req,res)=>{
 
     //get brute force list of all tags
@@ -208,6 +223,9 @@ router.get('/tagsearch',(req,res)=>{
                 }
             }
         })
+
+        //alphabetize tags
+        tagList.sort();
         
         //get the tag to search for from URL query
         let searchParameter = req.query.search;
@@ -228,7 +246,9 @@ router.get('/tagsearch',(req,res)=>{
 
 })
 
+////////////////////
 //Raw Index
+////////////////////
 // rend raw JSON data to browser, for debugging purposes
 router.get('/rawdata',(req,res)=>{
     Track.find({},(error,data)=>{
@@ -236,9 +256,9 @@ router.get('/rawdata',(req,res)=>{
     })
 })
 
-//Seed
+// Seed
 // use only once!!!
-// router.get('/seedtracks',async (req,res)=>{
+router.get('/seedtracks',async (req,res)=>{
 
 // const newTracks = [
 // {
@@ -264,15 +284,148 @@ router.get('/rawdata',(req,res)=>{
 //     racer: "Sweet JP",
 //     director: "Takeski Koike"
 // }]
+const newTracks =[
+    {
+        title: "Strings for a Space Age (1962)",
+        url: 'https://www.youtube.com/watch?v=21MvljxtPjc',
+        genre: "Retro",
+        artist: "Bobby Christian",
+        tags:[
+            "retrofuture",
+            "sci-fi",
+            "space",
+            "jazz"
+        ]
+    },
+    {
+        title: 'Blue Tango',
+        url: 'https://www.youtube.com/watch?v=Iw3SYFdPrGc',
+        genre: "Retro",
+        artist: "Les Baxter",
+        tags:[
+            "jazz",
+        ]
+    },
+    {
+        title: 'Safari',
+        url: 'https://www.youtube.com/watch?v=zEyDUjFf-BA',
+        genre: 'Retro',
+        artist: 'Edmond De Luca',
+        tags:[
+            'jazz',
+            'world',
+            'cinematic'
+        ]
+    },
+    {
+        title: "La Vie En Rose Medley",
+        url:'https://www.youtube.com/watch?v=aGk6d6-osPY',
+        genre: 'Retro',
+        source: 'Bioshock Infinite',
+        artist: 'Edith Piaf',
+        tags:[
+            'retrofuture',
+            'lyrics',
+            'soundtrack',
+            'bioshock'
+        ]
+    },
+    {
+        title: 'La Mer (Burial at Sea)',
+        url: 'https://www.youtube.com/watch?v=TWGNxaGtd48',
+        genre: 'Retro',
+        source: 'Bioshock Infinite',
+        tags:[
+            'retrofuture',
+            'soundtrack',
+            'creepy',
+        ]
+    },
+    {
+        title: 'Ambient Creepy Horror Music',
+        url: 'https://www.youtube.com/watch?v=oxvDnaWe5XE',
+        genre: 'Atmospheric Horror',
+        artist: 'Graham Plowman',
+        tags:[
+            'horror',
+            'atmospheric',
+            'lovecraft',
+            'creepy'
+        ]
+    },
+    {
+        title: 'Silent Chill Redux',
+        url: 'https://www.youtube.com/watch?v=vteCosE9qnM',
+        genre: 'Atmospheric Horror',
+        source: 'Silent Hill',
+        tags:[
+            'soundtrack',
+            'horror',
+            'creepy',
+            'chill',
+            'atmospheric'
+        ]
+    },
+    {
+        title: 'Invoking Nameless Horrors',
+        url: 'https://www.youtube.com/watch?v=lPs5lZjvGQo',
+        genre: 'Atmospheric Horror',
+        artist: 'Iron Cthulhu Apocalypse',
+        tags:[
+            'atmospheric',
+            'horror',
+            'creepy',
+            'lovecraft'
+        ]
+    },
+    {
+        title: 'Dark Piano - Sociopath',
+        url: 'https://www.youtube.com/watch?v=VagES3pxttQ',
+        genre: 'Atmospheric Horror',
+        artist: 'Lucas King',
+        tags:[
+            'piano',
+            'instrumental',
+            'creepy',
+            'atmospheric',
+            'horror'
+        ]
+    },
+    {
+        title: 'Wanted Dead or Alive',
+        url: 'https://www.youtube.com/watch?v=W2deYsT3uCs',
+        genre: 'Action',
+        source: 'Payday 2',
+        artist: 'Simon Viklund',
+        tags:[
+            'crime',
+            'fast',
+            'instrumental',
+        ]
+    },
+    {
+        title: 'Infinite Ammo',
+        url: 'https://www.youtube.com/watch?v=7tB4kHNhEHc',
+        genre: 'Action',
+        source: 'Payday 2',
+        artist: 'Le Castle Vania',
+        tags:[
+            'crime',
+            'fast',
+            'action',
+            'electronica'
+        ]
+    }]
 
-// try {
-//     const seedTracks = await Track.create(newTracks)
-//     res.send(seedTracks)
-//     console.log("seed tracks added")
-//   } catch (err) {
-//     res.send(err.message)
-//   }
-// })
+
+try {
+    const seedTracks = await Track.create(newTracks)
+    res.send(seedTracks)
+    console.log("seed tracks added")
+  } catch (err) {
+    res.send(err.message)
+  }
+})
 
 //Capitalization function, for use in Create and Update routes
 

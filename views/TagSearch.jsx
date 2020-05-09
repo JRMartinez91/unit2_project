@@ -11,12 +11,19 @@ class TagSearch extends React.Component{
             <>
             <head>
                 <link href="/style.css" rel="stylesheet"></link>
+                <link href='https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400' rel='stylesheet' type='text/css'></link>
+                <link href="https://fonts.googleapis.com/css2?family=Cutive&family=Engagement&family=Oregano&family=Ranga:wght@400;700&display=swap" rel="stylesheet"></link>
+
             </head>
             <body>
                 {/* list of all tags */}
                 <Header/>
-                <h2>Tags:</h2>
-                <div>
+                <div className='group-name-wrapper'>
+                    <div className="left-end"></div>
+                    <div className="group-name">Tag Search</div>
+                    <div className="right-end"></div>
+                </div>
+                <div className="tag-cloud">
                     {tagList.map((tag,index)=>{
                         //make sure currently active tag is highlighted
                         console.log(tag,activeTag)
@@ -32,7 +39,7 @@ class TagSearch extends React.Component{
                     }
                     })}
                 </div>
-                <h2>Tracks:</h2>
+                <h3>Matching Tracks:</h3>
                 <div className="inner-group-box">
                     {tracks.map((track,index)=>{
                         return(

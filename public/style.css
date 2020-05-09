@@ -1,21 +1,61 @@
 *{
-    border: 1px solid lightblue;
+    /* border: 1px solid lightsalmon; */
     padding: 10px;
     box-sizing: border-box;
+    font-family: 'Cutive', serif;
 }
-/* Universal */
+/* Universal
+font-family: 'Oregano', cursive;
+font-family: 'Cutive', serif;
+font-family: 'Engagement', cursive;
+font-family: 'Ranga', cursive;
+font-family: 'Playfair Display', serif;*/
 
 input{
     border: 1px solid black;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 14px;
+}
+
+textarea{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 12px;
+}
+
+select{
+    height: 40px;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 14px;
+}
+
+.centered{
+    text-align:center;
+}
+
+.sub-page-title{
+    font-family: 'Oregano', serif;
+    font-size: 2em;
+    text-align: center;
+    margin-top: 0
 }
 /* Index Page */
+.page-title{
+    font-family:'Oregano',serif;
+    font-weight:normal;
+    text-align: center;
+    font-size: 3em;
+    margin: 0.25em;
+}
+
 .title-card{
+    line-height: 0.75em;
     border: 2px solid black;
     background-color: beige;
-    width: 45%;
-    max-width: 400px;
+    width: 400px;
     transition-duration:1s;
-    padding: 5px;
+    padding: 10px 5px 5px 5px;
+    margin-bottom: 10px;
+    background-image: url('https://i.imgur.com/KCRgsYM.png')
 }
 
 .title-card h3{
@@ -74,10 +114,41 @@ input{
 .delete-button{
     background-color: rgb(153, 116, 116);
 }
+
+.group-name-wrapper{
+    display:flex;
+    justify-content: center;
+}
+
 .group-name{
-    width:fit-content;
-    padding: 5px 20px;
-    margin: 5px auto;
+    padding: 5px;
+    height: 76px;
+    font-size: 40px;
+    background-image:url('https://i.imgur.com/LuhkTUK.png');
+    background-size: contain;
+    border: none;
+    line-height: 60px;
+    color:white;
+    text-shadow: -1px -1px 1px black;
+    font-family: 'Playfair Display', serif;
+}
+
+.left-end{
+    height: 76px;
+    width: 60px;
+    background-image: url('https://i.imgur.com/ypPdtPK.png');
+    background-size: contain;
+    border: none;
+
+}
+
+.right-end{
+    height: 76px;
+    width: 60px;
+    background-image: url('https://i.imgur.com/lRokoVd.png');
+    background-size: contain;
+    border: none;
+
 }
 
 .inner-group-box{
@@ -86,15 +157,18 @@ input{
     justify-content: space-evenly;
     padding: 10px 0;
     background-color: rgb(48, 46, 46);
-    border: 5px solid grey;
+    border: 15px solid grey;
     border-radius: 20px;
+    border-image: url('https://i.imgur.com/5Fsv9ry.png') 33 stretch;
+
 }
 
 .outer-group-box{
-    border: 5px solid gray;
-    border-radius: 20px;
+    border: 15px solid black;
+    border-image: url('https://i.imgur.com/5Fsv9ry.png') 33 stretch;
     margin-bottom: 10px;
     padding: 10px;
+
 }
 
 .url-display{
@@ -122,9 +196,9 @@ nav{
     text-decoration: none;
     width: 200px;
     text-align:center;
-    font-size: 20px;
-    /* line-height: 2em; */
-    
+    font-size: 25px;
+    font-family: 'Oregano',serif;    
+    padding: 5px;
 }
 
 .mini-nav{
@@ -141,25 +215,30 @@ nav{
 
 .video-wrapper{
     margin-right: 10px;
-    border: 5px solid gray;
+    border: 20px solid gray;
     border-radius: 20px;
-    height: 350px;
+    border-image: url('https://i.imgur.com/5Fsv9ry.png') 33 stretch;
+    height: 370px;
 }
 
 .form-box{
     width: 500px;
-    border: 5px solid gray;
+    border: 20px solid gray;
     border-radius: 20px;
+    border-image: url('https://i.imgur.com/5Fsv9ry.png') 33 stretch;
 }
 
 .form-box h1{
     text-align: center;
+    border-bottom: 3px solid brown;
 }
 
 
 .form-box p{
     margin: 5px 0;
-    font-size: 20px;
+    font-size:15px;
+    border-top: 2px solid brown;
+    border-bottom: 2px solid brown;
 }
 
 .button-wrapper{
@@ -171,24 +250,46 @@ nav{
 .tag-box{
     background-color: lightseagreen;
     color:white;
+    margin: 10px;
 }
 
 .tag-selected, .tag-box:focus {
     background-color: red;
 }
 
+.tag-cloud{
+     background-color: rgb(48, 46, 46);
+     border: 15px solid black;
+     border-radius: 20px;
+     border-image: url('https://i.imgur.com/5Fsv9ry.png') 33 stretch;
+     display:flex;
+     flex-wrap: wrap;
+     justify-content: center;
+
+}
+
 /* Show Page */
 
 .show-box{
-    border: 5px solid gray;
-    border-radius: 20px;
     width: fit-content;
     margin: 0 auto;
+    border: 15px solid black;
+    border-radius: 20px;
+    border-image: url('https://i.imgur.com/5Fsv9ry.png') 33 stretch;
+}
+
+.show-box p{
+    border-top: 2px solid brown;
+    border-bottom: 2px solid brown;
 }
 
 .show-box h1{
     text-align:center;
     border-bottom: 3px solid black;
+}
+
+.url-display{
+    width: 100%;
 }
 
 

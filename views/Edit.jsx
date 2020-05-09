@@ -26,16 +26,22 @@ class Edit extends React.Component{
                 tagList += ", ";
             }
         }
+
+        //format url for display
+        let embedURL = url.replace("watch?v=","embed/")
         return(
             <>
             <head>
                 <link href="/style.css" rel="stylesheet"></link>
+                <link href='https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400' rel='stylesheet' type='text/css'></link>
+                <link href="https://fonts.googleapis.com/css2?family=Cutive&family=Engagement&family=Oregano&family=Ranga:wght@400;700&display=swap" rel="stylesheet"></link>
+
             </head>
             <body>
                 <Header/>
             <div className="form-box-wrapper">
                 <div className="video-wrapper">
-                    <iframe src={url} width="560" height="315" frameBorder="0" allowFullScreen></iframe>
+                    <iframe src={embedURL} width="560" height="315" frameBorder="0" allowFullScreen></iframe>
                 </div>
             <div className="form-box">
             <h1>Edit Track Info</h1>
@@ -64,7 +70,7 @@ class Edit extends React.Component{
                     <p>Artist:<input type="text" name="artist" defaultValue={artist}/></p>
                     <p>Source:<input type="text" name="source" defaultValue={source}/></p>
                     <p>Tags:<input type="text" name="tags" defaultValue={tagList}/></p>
-                    <p><input type="submit" name="" value="Add Track"/></p>
+                    <p className="centered"><input className="big-button" type="submit" name="" value="Submit Changes"/></p>
                 </form>
             </div>
             </div>

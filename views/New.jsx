@@ -24,6 +24,9 @@ class New extends React.Component {
             <>
             <head>
                 <link href="/style.css" rel="stylesheet"></link>
+                <link href='https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400' rel='stylesheet' type='text/css'></link>
+                <link href="https://fonts.googleapis.com/css2?family=Cutive&family=Engagement&family=Oregano&family=Ranga:wght@400;700&display=swap" rel="stylesheet"></link>
+
             </head>
             <body>
             <Header/>
@@ -36,17 +39,17 @@ class New extends React.Component {
                     {/* Find a way to make it so either:
                     the "enter a name for the genre box only appears when "new genre" is selected from the dropdown
                     OR the dropdown menu only appears when the 'use preexisting genre' checkbox is checked */}
-                    <select name="oldGenre" form="newtrack">
+                    <p>Genre: <select name="oldGenre" form="newtrack">
                         {/* Create a list of genre names by mapping over the array created above */}
                         { genreList.map((name,index)=>{
                             return(
                                 <option value={name}>{name}</option>
                             )
                         })}
-                    </select>
+                    </select></p>
                     <p>Add New Genre:<input type="checkbox" name="addingNewGenre"/></p>
                     <input type="text" name="newGenre"/>
-                    <p>Optional Information</p>
+                    <p className="centered">Optional Information</p>
                     <p>Artist:<input type="text" name="artist"/></p>
                     <p>Source:<input type="text" name="source"/></p>
                     <p>Tags:<input type="text" name="tags"/></p>

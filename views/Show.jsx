@@ -8,7 +8,7 @@ class Show extends React.Component{
         let {url} = this.props.track;
 
         //convert youtube url for use in iframe
-        url = url.replace("watch?v=","embed/")
+        const embedURL = url.replace("watch?v=","embed/")
 
         //only print Artist and Source if they've been defined
 
@@ -57,20 +57,23 @@ class Show extends React.Component{
             <>
             <head>
                 <link href="/style.css" rel="stylesheet"></link>
+                <link href='https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400' rel='stylesheet' type='text/css'></link>
+                <link href="https://fonts.googleapis.com/css2?family=Cutive&family=Engagement&family=Oregano&family=Ranga:wght@400;700&display=swap" rel="stylesheet"></link>
+
             </head>
             <body>
                 <Header/>
             <div className="show-box">
                 <h1>{title}</h1>
                 {/* youtube video */}
-                <iframe src={url} width="560" height="315" frameBorder="0" allowFullScreen></iframe>
+                <iframe src={embedURL} width="560" height="315" frameBorder="0" allowFullScreen></iframe>
                 {/* artist_label and source_label will either be <p> elements or empty strings */}
-                <p><textarea className="url-display">{"!play "+track.url}</textarea></p>
+                <p><textarea className="url-display">{"!play "+url}</textarea></p>
                 <div>
                 {artist_label} {source_label}
                 <p>{tag_label}{tagHandler()}</p>
                 </div>
-                <p className="mini-nav"><a className="big-button" href={`/tracklist/track/${track._id}/edit`}>Edit</a></p>
+                <p className="mini-nav"><a className="big-button" href={`/tracklist/track/${_id}/edit`}>Edit</a></p>
             </div>
             </body>
             </>

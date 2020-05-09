@@ -53,10 +53,12 @@ class Index extends React.Component{
             <head>
                 <link href="/style.css" rel="stylesheet"></link>
                 <script src="../click_copy.js"></script>
+                <link href='https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400' rel='stylesheet' type='text/css'></link>
+                <link href="https://fonts.googleapis.com/css2?family=Cutive&family=Engagement&family=Oregano&family=Ranga:wght@400;700&display=swap" rel="stylesheet"></link>
 
             </head>
             <body>
-                <h1>Annasthesia's Marvelous Musical Automat</h1>
+                <h1 className="page-title">Annasthesia's Marvelous Musical Automat</h1>
                 <nav>
                     <a className="big-button" href="/tracklist/newtrack">Add New Track</a>
                     <a className="big-button" href="/tracklist?search=genre">Sort by Genre</a>
@@ -71,7 +73,11 @@ class Index extends React.Component{
                             return(
                                 <div className="outer-group-box">
                                     {/* we can asssume the first song in the category has the correct group name on hand. */}
-                                    <h2 className="group-name">{group[0][searchParameter]}</h2>
+                                    <div className='group-name-wrapper'>
+                                        <div className="left-end"></div>
+                                        <div className="group-name">{group[0][searchParameter]}</div>
+                                        <div className="right-end"></div>
+                                    </div>
                                     <div className="inner-group-box">
                                     {
                                         // each genre category is an array of tracks
