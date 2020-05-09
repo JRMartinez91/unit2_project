@@ -3,7 +3,10 @@ const React = require('react')
 class Edit extends React.Component{
     render(){
         //get track variables
-        const {_id,title,genre,artist,source,url} = this.props.track;
+        const {_id,title,genre,artist,source,tags} = this.props.track;
+        let {url} = this.props.track
+        //formal URL for embedding
+        url = url.replace("watch?v=","embed/")
         //get brute force genre list
         const {list} = this.props;
         //construct the array
@@ -15,8 +18,26 @@ class Edit extends React.Component{
         })
         //alphabetize the array
         genreList.sort();
+        //convert tags array into string
+        let tagList = "";
+        for(let i = 0; i<tags.length; i++){
+            tagList += tags[i];
+            //add a comma between tags, but not after the last one
+            if(i<(tags.length-1)){
+                tagList += ", ";
+            }
+        }
         return(
             <>
+            <head>
+                <link href="/style.css" rel="stylesheet"></link>
+            </head>
+            <body>
+            <div className="form-box-wrapper">
+                <div className="video-wrapper">
+                    <iframe src={url} width="560" height="315" frameBorder="0" allowFullScreen></iframe>
+                </div>
+            <div className="form-box">
             <h1>Edit Track Info</h1>
             <form action={`/tracklist/track/${_id}/?_method=PUT`} method = "POST" id="updateTrack">
                     <p>Title:<input type="text" name="title" defaultValue={title}/></p>
@@ -24,7 +45,7 @@ class Edit extends React.Component{
                     {/* Find a way to make it so either:
                     the "enter a name for the genre box only appears when "new genre" is selected from the dropdown
                     OR the dropdown menu only appears when the 'use preexisting genre' checkbox is checked */}
-                    <select name="oldGenre" form="newtrack">
+                    <select name="oldGenre" form="updateTrack">
                         {/* Create a list of genre names by mapping over the array created above */}
                         { genreList.map((name,index)=>{
                             if(name===genre){
@@ -41,8 +62,12 @@ class Edit extends React.Component{
                     <p>Optional Information</p>
                     <p>Artist:<input type="text" name="artist" defaultValue={artist}/></p>
                     <p>Source:<input type="text" name="source" defaultValue={source}/></p>
+                    <p>Tags:<input type="text" name="tags" defaultValue={tagList}/></p>
                     <p><input type="submit" name="" value="Add Track"/></p>
                 </form>
+            </div>
+            </div>
+            </body>
             </>
         )
     }

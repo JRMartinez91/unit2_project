@@ -104,16 +104,30 @@ router.get('/track/:id',(req,res)=>{
 
 //Update
 router.put('/track/:id',(req,res)=>{
-        if(req.body.addingNewGenre==="on"){
-            req.body.genre = req.body.newGenre;
-        } else {
-            req.body.genre = req.body.oldGenre;
-        }
+    if(req.body.addingNewGenre==="on"){
+        req.body.genre = req.body.newGenre;
+    } else {
+        req.body.genre = req.body.oldGenre;
+    }
+
+    //parse the string of tags into an array
+    //so that tags with the same text but different capitalization
+    //are not duplicated, they will all be displayed
+    //With The First Letter Of Each Word Capitalized
+    req.body.tags = req.body.tags.split(", ")
+
+    req.body.tags = arrayCapCase(req.body.tags);
+    
+    //loop through tags
+   
+
+    console.log(req.body.tags)
+    console.log(req.body.genre)
         
-        //update track document
-        Track.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err,updatedTrack)=>{
-            res.redirect(`/tracklist/track/${req.params.id}`)
-        })
+    //update track document
+    Track.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err,updatedTrack)=>{
+        res.redirect(`/tracklist/track/${req.params.id}`)
+    })
 })
 
 //Delete
@@ -128,16 +142,89 @@ router.delete('/:id',(req,res)=>{
 //THIS MUST INCLUDE A SYSTEM THAT FORBIDS DUPLICATE LINKS OR TITLES
 //if a duplicate is found, redirect to New.jsx with a message that duplicates are not allowed
 router.post('/',(req,res)=>{
+    //"genre" is a recognized attribute of the Track model,
+    //but oldGenre and newGenre are not, so they wil be ignored
     if(req.body.addingNewGenre==="on"){
         req.body.genre = req.body.newGenre;
     } else {
         req.body.genre = req.body.oldGenre;
     }
-    //"genre" is a recognized attribute of the Track model,
-    //but oldGenre and newGenre are not, so they wil be ignored
-    Track.create(req.body,(error,createdTrack)=>{
-        res.send(createdTrack)
+    //parse the string of tags into an array
+    //so that tags with the same text but different capitalization
+    //are not duplicated, they will all be displayed
+    //With The First Letter Of Each Word Capitalized
+    req.body.tags = req.body.tags.split(", ")
+
+    for(word of req.body.tags){
+        word[0] = word[0].toUpperCase();
+        for(let i = 1; i < word.length; i++){
+            if(word[i-1]===" "){
+                word[i] = word[i].toUpperCase();
+            }
+        }
+    }
+
+    //prevent dupiclate titles or URLs
+    let dupeTitle = false;
+    let dupeURL = false;
+    Track.find({title:req.body.title},(err,foundTracks)=>{
+        if(foundTracks.length>0){
+            //duplicate name detected!
+            dupeTitle = true;
+        }
+        Track.find({url:req.body.url},(err,foundTracks)=>{
+            if(foundTracks.length>0){
+                //duplicate URL detected!
+                dupeURL = true;
+            }
+
+            if(dupeTitle || dupeURL){
+                //if a duplicate title or URL is detected,
+                //do NOT create a new track
+                res.render('New');
+            } else {
+                //if there are no duplicates, create a new track
+                Track.create(req.body,(error,createdTrack)=>{
+                    res.send(createdTrack)
+                })
+            }
+        })
     })
+})
+
+//Tag Search
+router.get('/tagsearch',(req,res)=>{
+
+    //get brute force list of all tags
+    let tagList = []
+    Track.find({},(error, allTracks)=>{
+        
+        //add all tags to a single list
+        allTracks.map((doc,index)=>{
+            const tags = doc.tags
+            for(let i = 0; i<tags.length; i++){
+                if(!tagList.includes(tags[i])){
+                    tagList.push(tags[i])
+                }
+            }
+        })
+        
+        //get the tag to search for from URL query
+        let searchParameter = req.query.search;
+        
+        //find all tracks whose tag lists include that tag
+        //pass the list of all possible tags to render the menu
+        //  from which the user will select a tag
+        Track.find({tags: searchParameter},(error,foundTracks)=>{
+            res.render('TagSearch',{
+                tracks: foundTracks,
+                tagList: tagList
+            })
+        })
+
+    })
+
+
 })
 
 //Raw Index
@@ -186,5 +273,42 @@ router.get('/rawdata',(req,res)=>{
 //   }
 // })
 
+//Capitalization function, for use in Create and Update routes
+
+//return a string with Every Word Capitalized
+const capCase = (phrase) => {
+
+        //split phrase into an array of letters
+        let phraseArray = phrase.split("");
+
+        //capitalize first letter of the array
+        phraseArray[0] = phraseArray[0].toUpperCase();
+
+        //for remaining letters...
+        for(let i = 1; i < phraseArray.length; i++){
+            //...capitalize the letter if the previous character is a space
+            if(phraseArray[i-1]===" "){
+                phraseArray[i] = phraseArray[i].toUpperCase();
+            }
+        }
+        //convert array to string
+        const newPhrase = phraseArray.reduce((acc,cur)=>{
+            return acc + cur;
+        })
+    
+        return newPhrase
+}
+
+//return an array of strings with Each Word In Each String Capitalized
+const arrayCapCase = (arrayOfTags) => {
+
+    let newTags = [];
+
+    for(i = 0; i < arrayOfTags.length; i++){
+        newTags.push(capCase(arrayOfTags[i]));
+    }
+
+    return newTags;
+}
 
 module.exports = router;

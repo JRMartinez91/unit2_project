@@ -1,9 +1,10 @@
 const React = require('react');
+const Header = require('./Header')
 
 class Show extends React.Component{
     render(){
         //get variables
-        const {title, genre, artist, source}=this.props.track;
+        const {title, genre, artist, source, tags}=this.props.track;
         let {url} = this.props.track;
 
         //convert youtube url for use in iframe
@@ -22,8 +23,22 @@ class Show extends React.Component{
             source_label = (<p>Source: {source}</p>)
         } 
 
+        //print either the list of tags, or "No Tags"
+
+        let tag_label = "Tags: ";
+
+        console.log(tags)
+        if(tags.length<1){
+            tag_label = "No Tags";
+        }else{
+            tag_label += tags.reduce((acc,curr)=>{
+                return acc + ", " + curr
+            })
+        }
+
         return(
             <div>
+                <Header/>
                 <h1>{title}</h1>
                 {/* youtube video */}
                 <iframe src={url} width="560" height="315" frameBorder="0" allowFullScreen></iframe>
@@ -31,6 +46,7 @@ class Show extends React.Component{
                 <div>
                 {artist_label} {source_label}
                 </div>
+                <p>{tag_label}</p>
                 <p><a href="/tracklist">Back to Index</a></p>
             </div>
         )

@@ -20,8 +20,14 @@ class New extends React.Component {
         genreList.sort();
 
         return(
-            <div>
-                <h1>Add New Track</h1>
+            <>
+            <head>
+                <link href="/style.css" rel="stylesheet"></link>
+            </head>
+            <body>
+            <div className="form-box-wrapper">
+            <div className="form-box">
+                <h1>New Track</h1>
                 <form action="/tracklist" method = "POST" id="newtrack">
                     <p>Title:<input type="text" name="title"/></p>
                     <p>Youtube Link:<input type="url" name="url"/></p>
@@ -41,9 +47,13 @@ class New extends React.Component {
                     <p>Optional Information</p>
                     <p>Artist:<input type="text" name="artist"/></p>
                     <p>Source:<input type="text" name="source"/></p>
-                    <p><input type="submit" name="" value="Add Track"/></p>
+                    <p>Tags:<input type="text" name="tags"/></p>
+                    <p className="button-wrapper"><input className="big-button" type="submit" name="" value="Add Track"/></p>
                 </form>
             </div>
+            </div>
+            </body>
+            </>
         )
     }
 }

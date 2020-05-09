@@ -39,4 +39,10 @@ The next step is about organizing tracks -- being able to sort them on the index
 - organizing the index page via nested map functions
 - deliberately including 'junk data' in the mongoose create functions, knowing that it will be ignored. The form does not create an actual 'genre' attribute for the Track object, rather, once the data from the form is passed to the Create route, the controller creates the genre attribute by choosing from one of two possible inputs on the form.
 - how did we handle the "No Artist" and "No Source" defaults?
--
+
+- the tag search is probably the coolest aspect of this
+
+- difficulties with event handlers
+    - wrestling with the diferences between react and express-react
+
+- the backstory of the site-- origin of Annasthesia Mascot? :P

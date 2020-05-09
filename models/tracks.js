@@ -7,7 +7,8 @@ const trackSchema = new Schema({
     url: {type: String, required:true},
     genre: {type:String, required:true},
     source: {type:String, default:"No Source"},
-    artist: {type:String, default:"No Artist"}
+    artist: {type:String, default:"No Artist"},
+    tags: [{type:String}]
 },{timestamps:true});
 
 //create model from Schema

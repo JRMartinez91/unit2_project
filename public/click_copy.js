@@ -1,3 +1,7 @@
-const clickAlert = (event)=>{
-    alert("element clicked",event.currentTarget);
+function clickAlert(){
+    alert("element clicked");
 }
+
+// clickAlert();
+
+// document.getElementsByClassName("title-card").onClick = 
