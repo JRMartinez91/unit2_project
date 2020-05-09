@@ -203,7 +203,9 @@ router.post('/',(req,res)=>{
             } else {
                 //if there are no duplicates, create a new track
                 Track.create(req.body,(error,createdTrack)=>{
-                    res.send(createdTrack)
+                    res.render('Show',{
+                        track:createdTrack
+                    })
                 })
             }
         })
