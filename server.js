@@ -35,5 +35,5 @@ app.use('/tracklist',tracksController);
 
 //listen
 app.listen(PORT,()=>{
-    console.log('The Marvelous Muscial Automat is listening on Port',port);
+    console.log('The Marvelous Muscial Automat is listening on Port',PORT);
 })
