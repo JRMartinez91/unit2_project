@@ -1,9 +1,9 @@
 {
-  "engines":{
-    "node":"13.8.0"
-  },
   "name": "unit2_project",
   "version": "1.0.0",
+      "engines":{
+        "node":"13.8.0"
+      },
   "description": "James Martinez's Unit 2 Project, SEIR-MAE",
   "main": "server.js",
   "dependencies": {
